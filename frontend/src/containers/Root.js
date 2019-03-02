@@ -30,24 +30,26 @@ function Root() {
   };
 
   return (
-    <section className="root">
-      <ToastContainer autoClose={1000} />
+    <AppContext.Provider>
+      <section className="root">
+        <ToastContainer autoClose={1000} />
 
-      <TotalBalance appInstance={appInstance} />
+        <TotalBalance appInstance={appInstance} />
 
-      <h3 style={{ marginLeft: '7.5%' }}>List of all customers</h3>
+        <h3 style={{ marginLeft: '7.5%' }}>List of all customers</h3>
 
-      <CreateCustomer handleAppState={handleAppState} notify={notify} />
-      <TableAllCustomers
-        handleAppState={handleAppState}
-        appInstance={appInstance}
-        notify={notify}
-      />
+        <CreateCustomer handleAppState={handleAppState} notify={notify} />
+        <TableAllCustomers
+          handleAppState={handleAppState}
+          appInstance={appInstance}
+          notify={notify}
+        />
 
-      <h3 style={{ marginLeft: '7.5%', marginTop: '35px' }}>List of all inactive customers</h3>
+        <h3 style={{ marginLeft: '7.5%', marginTop: '35px' }}>List of all inactive customers</h3>
 
-      <TableNotActiveCustomers appInstance={appInstance} />
-    </section>
+        <TableNotActiveCustomers appInstance={appInstance} />
+      </section>
+    </AppContext.Provider>
   );
 }
 
