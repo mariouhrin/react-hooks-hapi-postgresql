@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { setConfig } from 'react-hot-loader';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,6 +13,8 @@ import {
   TableNotActiveCustomers,
   CreateCustomer
 } from '../components';
+
+const AppContext = createContext();
 
 function Root() {
   const [appInstance, setAppInstance] = useState(0);
