@@ -1,4 +1,4 @@
-# Fullstack app example
+# React hooks with hapi and postgresql fullstack app
 
 ## Overview
 

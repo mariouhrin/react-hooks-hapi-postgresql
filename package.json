@@ -1,5 +1,5 @@
 {
-  "name": "fullstact-app",
+  "name": "react-hapi-postgresql-app",
   "private": true,
   "workspaces": [
     "frontend",
