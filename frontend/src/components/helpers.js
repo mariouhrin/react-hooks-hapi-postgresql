@@ -130,3 +130,42 @@ export function hideTablesScrollbar(openModal) {
     });
   }
 }
+
+export function inputsMapping(range) {
+  const { start, end } = range;
+
+  const inputMap = [
+    { id: 'name', type: 'text' },
+    { id: 'balance', type: 'number' },
+    { id: 'phone', type: 'text' },
+    { id: 'company', type: 'text' },
+    { id: 'age', type: 'number' },
+    { id: 'email', type: 'email' },
+    { id: 'address', type: 'text' }
+  ];
+
+  if (end) {
+    return inputMap.slice(start, end);
+  }
+
+  return inputMap.slice(start);
+}
+
+export function capitalize(inputString) {
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+}
+
+export function generateInputObject(id, data, handleChange, type) {
+  const inputObject = {
+    id: `input-${id}`,
+    value: data[id],
+    onChange: handleChange,
+    type,
+    placeholder: `${capitalize(id)}`,
+    className: 'form-inputs'
+  };
+
+  const labelName = `${capitalize(id)}`;
+
+  return { labelName, inputObject };
+}

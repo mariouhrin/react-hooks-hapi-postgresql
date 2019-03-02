@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 
+import { Inputs } from './Inputs';
+import { Select } from './Select';
 import { axiosHandler } from '../utils/utils';
 import { inititialFormData } from './helpers';
 import { AppContext } from '../containers/Root';
@@ -8,7 +10,8 @@ export function Form({ dataForUpdate, crudAction }) {
   const [data, setData] = useState(() => inititialFormData(dataForUpdate));
   const { appInstance, setAppInstance, notify } = useContext(AppContext);
 
-  const handleChange = (e, field) => {
+  const handleChange = (e) => {
+    const field = e.target.id.split('-')[1];
     setData({ ...data, [field]: e.target.value });
   };
 
@@ -34,111 +37,19 @@ export function Form({ dataForUpdate, crudAction }) {
   return (
     <article className="form-wrapper">
       <div>
-        <h3>Please {crudAction === 'create' ? 'fill ' : 'edit '}the form</h3>
-        <form className="pure-form pure-form-stacked" onSubmit={(e) => handleSubmit(e)}>
+        <h3>Please {crudAction === 'create' ? 'fill' : 'edit'} the form</h3>
+        <form className="pure-form pure-form-stacked" onSubmit={handleSubmit}>
           <section className="form-inputs-wrapper">
             <fieldset>
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label htmlFor="input-gender">
-                Gender
-                <select
-                  id="input-gender"
-                  value={data.gender}
-                  className="form-dropdown"
-                  onChange={(e) => handleChange(e, 'gender')}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </label>
-              <label htmlFor="input-name">
-                Name
-                <input
-                  id="input-name"
-                  type="text"
-                  placeholder="Name"
-                  className="form-inputs"
-                  value={data.name}
-                  onChange={(e) => handleChange(e, 'name')}
-                  required
-                />
-              </label>
-              <label htmlFor="input-balance">
-                Balance
-                <input
-                  id="input-balance"
-                  type="number"
-                  placeholder="Balance"
-                  className="form-inputs"
-                  value={data.balance}
-                  onChange={(e) => handleChange(e, 'balance')}
-                  required
-                />
-              </label>
-              <label htmlFor="input-phone">
-                Phone
-                <input
-                  id="input-phone"
-                  type="text"
-                  placeholder="Phone"
-                  className="form-inputs"
-                  value={data.phone}
-                  onChange={(e) => handleChange(e, 'phone')}
-                  required
-                />
-              </label>
+              <Select data={data} handleChange={handleChange} />
+              <Inputs data={data} handleChange={handleChange} range={{ start: 0, end: 3 }} />
             </fieldset>
+
             <fieldset>
-              <label htmlFor="input-company">
-                Company
-                <input
-                  id="input-company"
-                  type="text"
-                  placeholder="Company"
-                  className="form-inputs"
-                  value={data.company}
-                  onChange={(e) => handleChange(e, 'company')}
-                  required
-                />
-              </label>
-              <label htmlFor="input-age">
-                Age
-                <input
-                  id="input-age"
-                  type="number"
-                  placeholder="Age"
-                  className="form-inputs"
-                  value={data.age}
-                  onChange={(e) => handleChange(e, 'age')}
-                  required
-                />
-              </label>
-              <label htmlFor="input-email">
-                Email
-                <input
-                  id="input-email"
-                  type="email"
-                  placeholder="Email"
-                  className="form-inputs"
-                  value={data.email}
-                  onChange={(e) => handleChange(e, 'email')}
-                  required
-                />
-              </label>
-              <label htmlFor="input-address">
-                Address
-                <input
-                  id="input-address"
-                  type="text"
-                  placeholder="Address"
-                  className="form-inputs"
-                  value={data.address}
-                  onChange={(e) => handleChange(e, 'address')}
-                  required
-                />
-              </label>
+              <Inputs data={data} handleChange={handleChange} range={{ start: 3 }} />
             </fieldset>
           </section>
+
           <button type="submit" className="pure-button button-custom" onClick={notify}>
             Submit
           </button>
