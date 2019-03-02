@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ModalPopUp } from './Modal';
 import { hideTablesScrollbar } from './helpers';
 
-export function CreateCustomer({ handleAppState, notify }) {
+export function CreateCustomer() {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -31,8 +31,6 @@ export function CreateCustomer({ handleAppState, notify }) {
         isOpen={openModal}
         onRequestClose={handleCloseModal}
         dataForUpdate={[]}
-        handleAppState={handleAppState}
-        notify={notify}
         crudAction="create"
       />
     </>

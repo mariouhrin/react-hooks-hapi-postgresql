@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { axiosHandler } from '../utils/utils';
 import { inititialFormData } from './helpers';
+import { AppContext } from '../containers/Root';
 
-export function Form({ dataForUpdate, handleAppState, crudAction, notify }) {
+export function Form({ dataForUpdate, crudAction }) {
   const [data, setData] = useState(() => inititialFormData(dataForUpdate));
+  const { appInstance, setAppInstance, notify } = useContext(AppContext);
 
   const handleChange = (e, field) => {
     setData({ ...data, [field]: e.target.value });
@@ -26,7 +28,7 @@ export function Form({ dataForUpdate, handleAppState, crudAction, notify }) {
     };
 
     await axiosHandler(requests[crudAction].method, requests[crudAction].endpoint, sendData);
-    await handleAppState();
+    setAppInstance(appInstance + 1);
   };
 
   return (

@@ -14,7 +14,7 @@ import {
   CreateCustomer
 } from '../components';
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
 function Root() {
   const [appInstance, setAppInstance] = useState(0);
@@ -25,12 +25,8 @@ function Root() {
     });
   };
 
-  const handleAppState = async () => {
-    setAppInstance(appInstance + 1);
-  };
-
   return (
-    <AppContext.Provider>
+    <AppContext.Provider value={{ appInstance, setAppInstance, notify }}>
       <section className="root">
         <ToastContainer autoClose={1000} />
 
@@ -38,12 +34,8 @@ function Root() {
 
         <h3 style={{ marginLeft: '7.5%' }}>List of all customers</h3>
 
-        <CreateCustomer handleAppState={handleAppState} notify={notify} />
-        <TableAllCustomers
-          handleAppState={handleAppState}
-          appInstance={appInstance}
-          notify={notify}
-        />
+        <CreateCustomer />
+        <TableAllCustomers />
 
         <h3 style={{ marginLeft: '7.5%', marginTop: '35px' }}>List of all inactive customers</h3>
 

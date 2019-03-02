@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactTable from 'react-table';
 
 import { axiosHandler } from '../utils/utils';
 import { columnsAll, customFilter, hideTablesScrollbar } from './helpers';
 import { ModalPopUp } from './Modal';
+import { AppContext } from '../containers/Root';
 
-export function TableAllCustomers({ handleAppState, appInstance, notify }) {
+export function TableAllCustomers() {
   const [data, setData] = useState([]);
   const [dataForUpdate, setDataForUpdate] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const { appInstance, setAppInstance } = useContext(AppContext);
 
   const handleOpenModal = (guid) => {
     setDataForUpdate(data.filter((record) => record.guid === guid));
@@ -21,7 +23,7 @@ export function TableAllCustomers({ handleAppState, appInstance, notify }) {
 
   const deleteCustomerByGuid = async (guid) => {
     await axiosHandler('delete', `api/customers/${guid}`);
-    await handleAppState();
+    setAppInstance(appInstance + 1);
   };
 
   const fetchAllData = async () => {
@@ -60,8 +62,6 @@ export function TableAllCustomers({ handleAppState, appInstance, notify }) {
           isOpen={openModal}
           onRequestClose={handleCloseModal}
           dataForUpdate={dataForUpdate}
-          handleAppState={handleAppState}
-          notify={notify}
           crudAction="update"
         />
       </section>
