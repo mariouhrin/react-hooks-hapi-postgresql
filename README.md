@@ -1,4 +1,4 @@
-# Fullstack app using React hooks, hapi.js as server and postgresql DB
+# Fullstack app with React hooks, Hapi.js and Postgresql DB
 
 ## Overview
 
