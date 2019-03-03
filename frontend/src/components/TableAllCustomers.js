@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import ReactTable from 'react-table';
 
 import { axiosHandler } from '../utils/utils';
-import { columnsAll, customFilter, hideTablesScrollbar } from './helpers';
+import { tableColumnsAllCustomers, customFilter, hideTablesScrollbar } from './helpers';
 import { ModalPopUp } from './Modal';
 import { AppContext } from '../containers/Root';
+
+export const TableAllContext = createContext({ dataForUpdate: [], updateModal: false });
 
 export function TableAllCustomers() {
   const [data, setData] = useState([]);
@@ -45,7 +47,7 @@ export function TableAllCustomers() {
         {data.length && (
           <ReactTable
             data={data}
-            columns={columnsAll(handleOpenModal, deleteCustomerByGuid)}
+            columns={tableColumnsAllCustomers(handleOpenModal, deleteCustomerByGuid)}
             filterable
             defaultFilterMethod={customFilter}
             defaultPageSize={7}
@@ -58,12 +60,9 @@ export function TableAllCustomers() {
             className="-striped -highlight"
           />
         )}
-        <ModalPopUp
-          isOpen={openModal}
-          onRequestClose={handleCloseModal}
-          dataForUpdate={dataForUpdate}
-          crudAction="update"
-        />
+        <TableAllContext.Provider value={{ dataForUpdate, updateModal: openModal }}>
+          <ModalPopUp isOpen={openModal} onRequestClose={handleCloseModal} />
+        </TableAllContext.Provider>
       </section>
     </>
   );

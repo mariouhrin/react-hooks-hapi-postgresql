@@ -27,12 +27,8 @@ export function CreateCustomer() {
       >
         Create Customer
       </button>
-      <ModalPopUp
-        isOpen={openModal}
-        onRequestClose={handleCloseModal}
-        dataForUpdate={[]}
-        crudAction="create"
-      />
+
+      <ModalPopUp isOpen={openModal} onRequestClose={handleCloseModal} />
     </>
   );
 }

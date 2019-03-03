@@ -5,10 +5,13 @@ import { Select } from './Select';
 import { axiosHandler } from '../utils/utils';
 import { inititialFormData } from './helpers';
 import { AppContext } from '../containers/Root';
+import { TableAllContext } from './TableAllCustomers';
 
-export function Form({ dataForUpdate, crudAction }) {
+export function Form() {
+  const { dataForUpdate, updateModal } = useContext(TableAllContext);
   const [data, setData] = useState(() => inititialFormData(dataForUpdate));
   const { appInstance, setAppInstance, notify } = useContext(AppContext);
+  const httpMethod = updateModal ? 'update' : 'create';
 
   const handleChange = (e) => {
     const field = e.target.id.split('-')[1];
@@ -30,14 +33,14 @@ export function Form({ dataForUpdate, crudAction }) {
       }
     };
 
-    await axiosHandler(requests[crudAction].method, requests[crudAction].endpoint, sendData);
+    await axiosHandler(requests[httpMethod].method, requests[httpMethod].endpoint, sendData);
     setAppInstance(appInstance + 1);
   };
 
   return (
     <article className="form-wrapper">
       <div>
-        <h3>Please {crudAction === 'create' ? 'fill' : 'edit'} the form</h3>
+        <h3>Please {httpMethod === 'create' ? 'fill' : 'edit'} the form</h3>
         <form className="pure-form pure-form-stacked" onSubmit={handleSubmit}>
           <section className="form-inputs-wrapper">
             <fieldset>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function columnsAll(handleOpenModal, deleteCustomerByGuid) {
+export function tableColumnsAllCustomers(handleOpenModal, deleteCustomerByGuid) {
   const headersAndColumnWidth = {
     name: 150,
     balance: 70,
@@ -15,6 +15,8 @@ export function columnsAll(handleOpenModal, deleteCustomerByGuid) {
   };
 
   const cellStyle = { color: '#3366BB', fontWeight: 700, cursor: 'pointer' };
+
+  // set style and events for update button
   const cellLinkUpdate = (row) => {
     const { guid } = row.original;
 
@@ -24,6 +26,8 @@ export function columnsAll(handleOpenModal, deleteCustomerByGuid) {
       </button>
     );
   };
+
+  // set style and events for delete button
   const cellLinkDelete = (row) => {
     const { guid } = row.original;
 
@@ -70,6 +74,7 @@ export function columnsInactive() {
   };
 
   const headers = Object.keys(headersAndColumnWidth);
+
   const columns = headers.map((header) => ({
     Header: header,
     accessor: header,
