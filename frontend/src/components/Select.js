@@ -8,8 +8,8 @@ export function Select({ data, handleChange }) {
     <label htmlFor={name}>
       Gender
       <select id={name} value={data.gender} className="form-dropdown" onChange={handleChange}>
-        <option value="male">Male</option>
         <option value="female">Female</option>
+        <option value="male">Male</option>
       </select>
     </label>
   );

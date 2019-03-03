@@ -6,7 +6,7 @@ import { tableColumnsAllCustomers, customFilter, hideTablesScrollbar } from './h
 import { ModalPopUp } from './Modal';
 import { AppContext } from '../containers/Root';
 
-export const TableAllContext = createContext({ dataForUpdate: [], updateModal: false });
+export const TableAllContext = createContext({ dataForUpdate: [], isUpdate: false });
 
 export function TableAllCustomers() {
   const [data, setData] = useState([]);
@@ -60,7 +60,7 @@ export function TableAllCustomers() {
             className="-striped -highlight"
           />
         )}
-        <TableAllContext.Provider value={{ dataForUpdate, updateModal: openModal }}>
+        <TableAllContext.Provider value={{ dataForUpdate, isUpdate: true }}>
           <ModalPopUp isOpen={openModal} onRequestClose={handleCloseModal} />
         </TableAllContext.Provider>
       </section>

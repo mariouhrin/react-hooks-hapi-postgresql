@@ -8,10 +8,10 @@ import { AppContext } from '../containers/Root';
 import { TableAllContext } from './TableAllCustomers';
 
 export function Form() {
-  const { dataForUpdate, updateModal } = useContext(TableAllContext);
+  const { dataForUpdate, isUpdate } = useContext(TableAllContext);
   const [data, setData] = useState(() => inititialFormData(dataForUpdate));
   const { appInstance, setAppInstance, notify } = useContext(AppContext);
-  const httpMethod = updateModal ? 'update' : 'create';
+  const httpMethod = isUpdate ? 'update' : 'create';
 
   const handleChange = (e) => {
     const field = e.target.id.split('-')[1];
